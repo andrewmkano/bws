@@ -11,7 +11,7 @@ build:
     - yarn install
     - go mod download
     build:
-    - buffalo build --static -o /bin/app
+    - buffalo build --ldflags '-linkmode external -extldflags "-static"' -o /bin/app
 run:
   env: 
   - name: ADDR
