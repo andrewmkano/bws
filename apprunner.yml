@@ -1,0 +1,21 @@
+version: 1.0
+runtime: go1
+build:
+  env:
+    - name: GOPROXY
+      value: http://proxy.golang.org
+  commands:
+    pre-build:
+    - npm install --global yarn
+    - go install -tags sqlite github.com/gobuffalo/cli/cmd/buffalo@v0.18.14
+    - yarn install
+    - go mod download
+    build:
+    - buffalo build --static -o /bin/app
+run:
+  env: 
+  - name: ADDR
+    value: 0.0.0.0
+  command: ./bin/app
+  network:
+    port: 3000
