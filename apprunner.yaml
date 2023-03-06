@@ -4,12 +4,13 @@ build:
   env:
     - name: GOPROXY
       value: http://proxy.golang.org
+    - name: CGO_ENABLED
+      value: 0
   commands:
     pre-build:
     - npm install --global yarn
     - yarn install
     - go mod download
-    - yum install -y make glibc-devel gcc patch
     build:
     - go install -tags sqlite github.com/gobuffalo/cli/cmd/buffalo@v0.18.14
     - buffalo build -o /bin/app
