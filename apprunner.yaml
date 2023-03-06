@@ -9,6 +9,7 @@ build:
     - npm install --global yarn
     - yarn install
     - go mod download
+    - yum -y groupinstall "Development Tools"
     build:
     - go install -tags sqlite github.com/gobuffalo/cli/cmd/buffalo@v0.18.14
     - buffalo build -o /bin/app
