@@ -7,10 +7,10 @@ build:
   commands:
     pre-build:
     - npm install --global yarn
-    - go install -tags sqlite github.com/gobuffalo/cli/cmd/buffalo@v0.18.14
     - yarn install
     - go mod download
     build:
+    - go install -tags sqlite github.com/gobuffalo/cli/cmd/buffalo@v0.18.14
     - buffalo build -o /bin/app
 run:
   env: 
