@@ -19,11 +19,14 @@ COPY go.sum go.sum
 RUN go mod download
 
 ADD . .
-RUN buffalo build --static -o /bin/app
+RUN GOOS=linux GOARCH=arm64 buffalo build -o /bin/app
 
-FROM alpine
-RUN apk add --no-cache bash
-RUN apk add --no-cache ca-certificates
+FROM amazonlinux
+# RUN apk add --no-cache bash
+# RUN apk add --no-cache ca-certificates
+
+RUN yum install -y bash-completion
+RUN yum install -y ca-certificates
 
 WORKDIR /bin/
 
